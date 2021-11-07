@@ -2,8 +2,8 @@
   <div className="app">
     <header className="navbar"><h1>Movies</h1></header>
     <div className="main">
-      <Search />
-      <Movies />
+      <Search :genres="genres" :showFaves="showFaves" />
+      <Movies :movies="movies" />
     </div>
   </div>
 </template>
@@ -11,15 +11,49 @@
 <script>
 import Search from "./components/Search";
 import Movies from "./components/Movies";
-
+import axios from "axios";
 export default {
   name: "App",
   data: function () {
-    return {};
+    return {
+      genres: [],
+      movies: [],
+      showFaves: false,
+    };
   },
   components: {
     Search,
     Movies,
+  },
+  computed: {
+    genresComputed() {
+      return this.genres;
+    },
+    moviesComputed() {
+      return this.movies;
+    },
+  },
+  created: function () {
+    axios
+      .get("./genres")
+      .then(({ data }) => {
+        console.log(data);
+        console.log("this is the genres property from data: ", data.genres);
+        this.genres = data.genres;
+      })
+      .catch((err) => console.log(err))
+      .then(() =>
+        axios
+          .get("./movies", {
+            params: {
+              with_genres: 28,
+            },
+          })
+          .then(({ data }) => {
+            this.movies = data.results;
+          })
+          .catch((err) => console.log(err))
+      );
   },
 };
 </script>
@@ -65,98 +99,5 @@ body,
 .main {
   flex-grow: 1;
   display: flex;
-}
-
-.search {
-  flex-basis: 20%;
-  min-width: 200px;
-
-  padding: 20px;
-  background-color: #d35400;
-  z-index: 2;
-  text-align: center;
-  font-size: 20px;
-}
-
-.search > button {
-  font-size: 20px;
-  padding: 10px;
-}
-
-.search > select {
-  font-size: 20px;
-  padding: 10px;
-}
-
-.movies {
-  flex-basis: 80%;
-  display: flex;
-  flex-wrap: wrap;
-
-  margin: 0;
-  padding: 20px;
-  overflow-y: scroll;
-  background-color: #2c3e50;
-}
-
-.movie_item {
-  flex-basis: 22%;
-  box-sizing: border-box;
-  margin: 1.5%;
-
-  display: flex;
-  flex-direction: column;
-  list-style: none;
-
-  background-color: #fff;
-  border: 1px solid #eee;
-  box-shadow: 0 10px 28px -7px rgba(0, 0, 0, 0.1);
-}
-
-.movie_item > img {
-  width: 100%;
-}
-
-.movie_description {
-  display: flex;
-  flex-grow: 1;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: 10px;
-}
-
-.movie_description h2 {
-  color: #555;
-  font-weight: bold;
-  margin-bottom: 20px;
-}
-
-.movie_details {
-  display: flex;
-  justify-content: space-between;
-}
-
-.movie_details span {
-  color: #555;
-  font-size: 0.8rem;
-  font-weight: bold;
-}
-
-.movie_year,
-.movie_rating {
-  display: flex;
-  flex-direction: column;
-}
-
-.movie_year .title,
-.movie_rating .title {
-  color: #aaa;
-  margin-bottom: 5px;
-  font-size: 0.65rem;
-  font-weight: normal;
-}
-
-.movie_rating {
-  align-items: flex-end;
 }
 </style>
