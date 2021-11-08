@@ -1,6 +1,11 @@
 <template>
-  <ul className="movies">
-    <li v-for="movie in movies" :key="movie.title" className="movie_item">
+  <ul :movies="movies" className="movies">
+    <li
+      v-for="movie in movies"
+      @dblclick="$emit('handle-selected-movie', movie)"
+      :key="movie.title"
+      className="movie_item"
+    >
       <img :src="'https://image.tmdb.org/t/p/w1280/' + movie.poster_path" />
       <div className="movie_description">
         <h2>{{ movie.overview }}</h2>
@@ -28,9 +33,8 @@ export default {
   },
   props: {
     movies: Array,
-    favorites: Array,
-    showFaves: Boolean,
   },
+  methods: {},
 };
 </script>
 
@@ -58,6 +62,10 @@ export default {
   background-color: #fff;
   border: 1px solid #eee;
   box-shadow: 0 10px 28px -7px rgba(0, 0, 0, 0.1);
+}
+
+.movie_item:hover {
+  cursor: pointer;
 }
 
 .movie_item > img {

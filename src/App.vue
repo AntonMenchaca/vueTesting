@@ -1,9 +1,24 @@
 <template>
   <div className="app">
-    <header className="navbar"><h1>Movies</h1></header>
-    <div className="main">
-      <Search :genres="genres" :showFaves="showFaves" />
-      <Movies :movies="movies" />
+    <header className="navbar"><h1>My Movie List</h1></header>
+
+    <div v-if="movieSelected === false" className="main">
+      <Search
+        @handle-genre-change="renderNewMovies"
+        :genres="genres"
+        :showFaves="showFaves"
+        @handle-show-faves="handleFavorites"
+      />
+      <Movies
+        @handle-selected-movie="handleMovieSelect"
+        :movies="showFaves === true ? favorites : movies"
+      />
+    </div>
+    <div v-else>
+      <Movie
+        :title="selectedMovie.title"
+        :description="selectedMovie.overview"
+      />
     </div>
   </div>
 </template>
@@ -11,6 +26,7 @@
 <script>
 import Search from "./components/Search";
 import Movies from "./components/Movies";
+import Movie from "./components/Movie";
 import axios from "axios";
 export default {
   name: "App",
@@ -18,12 +34,16 @@ export default {
     return {
       genres: [],
       movies: [],
+      favorites: [],
       showFaves: false,
+      selectedMovie: {},
+      movieSelected: false,
     };
   },
   components: {
     Search,
     Movies,
+    Movie,
   },
   computed: {
     genresComputed() {
@@ -31,6 +51,29 @@ export default {
     },
     moviesComputed() {
       return this.movies;
+    },
+  },
+  methods: {
+    renderNewMovies(id) {
+      axios
+        .get("./movies", {
+          params: {
+            with_genres: id,
+          },
+        })
+        .then(({ data }) => {
+          this.movies = data.results;
+        })
+        .catch((err) => console.log(err));
+    },
+    handleFavorites(boolean) {
+      console.log("this is what we get emitted up: ", boolean);
+      this.showFaves = !boolean;
+    },
+    handleMovieSelect(movie) {
+      this.movieSelected = true;
+      this.selectedMovie = movie;
+      console.log("this is the selected movie: ", this.selectedMovie);
     },
   },
   created: function () {

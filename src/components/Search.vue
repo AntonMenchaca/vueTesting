@@ -1,17 +1,22 @@
 <template>
   <div className="search">
-    <button v-if="faves === true" @click="handleShowFavorites">
+    <button
+      v-if="this.showFaves === true"
+      @click="$emit('handle-show-faves', this.showFaves)"
+    >
       Show Favorites
     </button>
-    <button v-else @click="handleShowFavorites">Show All Movies</button>
+    <button v-else @click="$emit('handle-show-faves', this.showFaves)">
+      Show All Movies
+    </button>
     <br /><br />
-    <select @change="handleGenreChosen">
+    <select v-model="selected">
       <option v-for="genre in genres" :key="genre.id" :value="genre.id">
         {{ genre.name }}
       </option>
     </select>
     <br /><br />
-    <button>Search</button>
+    <button @click="$emit('handle-genre-change', this.selected)">Search</button>
   </div>
 </template>
 
@@ -25,15 +30,8 @@ export default {
   },
   data: function () {
     return {
-      faves: this.showFaves,
+      selected: "",
     };
-  },
-
-  methods: {
-    handleShowFavorites: function () {
-      this.faves = !this.faves;
-    },
-    handleGenreChosen: function () {},
   },
 };
 </script>
