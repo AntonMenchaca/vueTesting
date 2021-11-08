@@ -1,6 +1,8 @@
 <template>
   <div className="app">
-    <header className="navbar"><h1>My Movie List</h1></header>
+    <header className="navbar">
+      <h1 @dblclick="() => (movieSelected = false)">My Movie List</h1>
+    </header>
 
     <div v-if="movieSelected === false" className="main">
       <Search
@@ -134,6 +136,7 @@ body,
 .navbar > h1 {
   margin: 0;
   font-weight: 400;
+  cursor: pointer;
 }
 
 .main {

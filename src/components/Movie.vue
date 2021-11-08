@@ -1,6 +1,6 @@
 <template>
   <div className="video-player">
-    <div className="embed-responsive embed-responsive-16by9">
+    <div className="embed-responsive">
       <iframe
         className="embed-responsive-item"
         :src="'https://www.youtube.com/embed/' + video"
@@ -8,7 +8,7 @@
       ></iframe>
     </div>
     <div className="video-player-details">
-      <h3>{{ title }}</h3>
+      <h2>{{ title }}</h2>
       <div>{{ description }}</div>
     </div>
   </div>
@@ -27,9 +27,16 @@ export default {
 </script>
 
 <style>
+.embed-responsive {
+  width: 100vw;
+}
 .video-player {
-  margin: 0 20%;
-  height: 50%;
+  display: flex;
+  flex-direction: column;
+}
+iframe {
+  width: 100%;
+  height: 60vh;
 }
 
 .video-player-details {

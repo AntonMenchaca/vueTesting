@@ -11,6 +11,5 @@ describe("Search.vue", () => {
 
   it("initial render of button", () => {
     expect(button.text()).toContain("Show Favorites");
-    expect(button.text()).not.toContain("Show All Movies");
   });
 });
