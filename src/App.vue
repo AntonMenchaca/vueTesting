@@ -73,15 +73,12 @@ export default {
     handleMovieSelect(movie) {
       this.movieSelected = true;
       this.selectedMovie = movie;
-      console.log("this is the selected movie: ", this.selectedMovie);
     },
   },
   created: function () {
     axios
       .get("./genres")
       .then(({ data }) => {
-        console.log(data);
-        console.log("this is the genres property from data: ", data.genres);
         this.genres = data.genres;
       })
       .catch((err) => console.log(err))

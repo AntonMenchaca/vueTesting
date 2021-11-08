@@ -4,10 +4,10 @@
       v-if="this.showFaves === true"
       @click="$emit('handle-show-faves', this.showFaves)"
     >
-      Show Favorites
+      Show All Movies
     </button>
     <button v-else @click="$emit('handle-show-faves', this.showFaves)">
-      Show All Movies
+      Show Favorites
     </button>
     <br /><br />
     <select v-model="selected">
