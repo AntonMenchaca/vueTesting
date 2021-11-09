@@ -30,13 +30,16 @@ npm run test:e2e
 npm run lint
 ```
 
+
+![Add Movie to Favorites List](documentation/addingFavorite.gif)
+---
+
+![Remove Movie from Favorites List](documentation/removingFavorite.gif)
+---
+
+![Watch Trailer From Selected Movie](documentation/watchingTrailer.gif)
+---
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
 
 
-
-![](documentation/addingFavorite.gif)
-
-![](documentation/removingFavorite.gif)
- 
-![](documentation/watchingTrailer.gif)
