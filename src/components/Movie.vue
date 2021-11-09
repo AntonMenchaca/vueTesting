@@ -1,5 +1,12 @@
 <template>
-  <div className="video-player">
+  <div
+    :style="{
+      backgroundImage:
+        'url(https://image.tmdb.org/t/p/w1280/' + movie.backdrop_path + ')',
+      backgroundSize: 'cover',
+    }"
+    className="video-player"
+  >
     <div className="embed-responsive">
       <iframe
         className="embed-responsive-item"
@@ -8,8 +15,8 @@
       ></iframe>
     </div>
     <div className="video-player-details">
-      <h2>{{ title }}</h2>
-      <div>{{ description }}</div>
+      <h2>{{ movie.title }}</h2>
+      <div>{{ movie.overview }}</div>
     </div>
   </div>
 </template>
@@ -17,11 +24,12 @@
 <script>
 export default {
   name: "Movie",
-  data: function () {},
+  data: function () {
+    return {};
+  },
+
   props: {
-    description: String,
-    title: String,
-    video: String,
+    movie: Object,
   },
 };
 </script>
@@ -33,6 +41,7 @@ export default {
 .video-player {
   display: flex;
   flex-direction: column;
+  height: 100vh;
 }
 iframe {
   width: 100%;
@@ -40,9 +49,9 @@ iframe {
 }
 
 .video-player-details {
-  background-color: honeydew;
   padding: 8px;
   border: 0;
+  background-color: rgb(231, 231, 210);
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
   margin-top: 10px;
 }

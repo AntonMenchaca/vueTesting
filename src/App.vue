@@ -17,10 +17,7 @@
       />
     </div>
     <div v-else>
-      <Movie
-        :title="selectedMovie.title"
-        :description="selectedMovie.overview"
-      />
+      <Movie :movie="selectedMovie" />
     </div>
   </div>
 </template>
@@ -65,6 +62,7 @@ export default {
         })
         .then(({ data }) => {
           this.movies = data.results;
+          console.log("this is the movies", this.movies);
         })
         .catch((err) => console.log(err));
     },
@@ -75,6 +73,7 @@ export default {
     handleMovieSelect(movie) {
       this.movieSelected = true;
       this.selectedMovie = movie;
+      console.log(movie);
     },
   },
   created: function () {

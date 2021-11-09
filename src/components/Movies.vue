@@ -1,5 +1,5 @@
 <template>
-  <ul :movies="movies" className="movies">
+  <ul className="movies">
     <li
       v-for="movie in movies"
       @dblclick="$emit('handle-selected-movie', movie)"
