@@ -19,7 +19,6 @@
     </div>
     <div v-else>
       <Movie
-      :video="videoURL"
       :favorited="checkIfFavorited(selectedMovie)"
       @handle-remove-click="removeFavoriteMovie"
       @handle-favorite-click="addFavoriteMovie"
@@ -84,10 +83,12 @@ export default {
       }}).then(() => {
         axios.get('/favorites').then(({data}) => {
           this.favorites = data
+          console.log('this is the faves after making api call',this.favorites)
         })
       }).catch((err) => console.log(err))
     },
     removeFavoriteMovie(bool, movieID){
+      console.log(movieID)
       axios.delete('/movie', {data: {movieID}}).then(() => {
         axios.get('/favorites')
           .then(({data}) => {
@@ -109,15 +110,18 @@ export default {
     handleFavorites(boolean) {
       this.showFaves = !boolean;
     },
-    handleMovieSelect({title, poster_path, overview, release_date, vote_average, backdrop_path, id}) {
+
+    handleMovieSelect(movie) {
       axios.get("/videoURL", {params: {
-        movieID: id
+        movieID: movie.id
       }})
       .then(({data}) => {
         this.movieSelected = true;
-      this.selectedMovie = {title, poster_path, overview, release_date, vote_average, backdrop_path, id, video: data.results[data.results.length - 1].key}; })
+      this.selectedMovie = movie;
+      this.selectedMovie.video = data.results[data.results.length - 1].key 
+      console.log(this.selectedMovie)
+      })
       .catch((err) => console.log(err))
-     
     },
   },
   created: function () {
@@ -142,7 +146,6 @@ export default {
          axios
           .get("/favorites")
           .then(({ data }) => {
-            console.log(data)
             this.favorites = data;
           })
           .catch((err) => console.log(err))
@@ -163,9 +166,6 @@ body,
   font-weight: 400;
   height: 100%;
   width: 100%;
-}
-.return-btn{
-
 }
 
 button {

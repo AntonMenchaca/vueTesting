@@ -21,7 +21,7 @@
       <MovieBtn 
       :movie="movie"
       :isFavorited="favorited"
-      @handle-favorite-click="$emit('handle-favorite-click', this.isFavorited, this.movie)" @handle-remove-click="$emit('handle-remove-click', this.isFavorited, this.movie._id)"/>
+      @handle-favorite-click="$emit('handle-favorite-click', this.favorited, this.movie)" @handle-remove-click="$emit('handle-remove-click', this.favorited, this.movie._id)"/>
     </div>
   </div>
 </template>

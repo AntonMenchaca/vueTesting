@@ -39,9 +39,10 @@ export default {
 
 <style>
 .search {
+  top: 100px;
   flex-basis: 20%;
   min-width: 200px;
-
+  position: sticky;
   padding: 20px;
   background-color: #7c3302;
   z-index: 2;

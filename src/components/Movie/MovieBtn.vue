@@ -1,6 +1,6 @@
 <template>
-    <button v-if="isFavorited === true" @click="onRemoveClick(isFavorited, movie._id)">Remove Favorite</button>   
-    <button v-else @click="onFavoriteClick(isFavorited, movie)">Add Favorite</button>   
+    <button v-if="isFavorited === true" @click="onRemoveClick(isFavorited, movie)">Remove Favorite</button>   
+    <button v-else @click="onFavoriteClick(isFavorited, this.movie._id)">Add Favorite</button>   
 </template>
 
 <script>
@@ -13,9 +13,11 @@ export default {
 
   methods: {
       onRemoveClick(boolFavorited, currentMovieID) {
+          console.log(currentMovieID)
           this.$emit('handle-remove-click',boolFavorited, currentMovieID)
       },
       onFavoriteClick(boolFavorited, currentMovie) {
+          console.log(currentMovie)
            this.$emit('handle-favorite-click', boolFavorited, currentMovie)
       }
   }
