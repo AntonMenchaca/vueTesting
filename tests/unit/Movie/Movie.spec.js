@@ -3,7 +3,7 @@ import Movie from "@/components/Movie/Movie.vue";
 jest.mock('axios', () => ({
   get: Promise.resolve('value')
 }))
-// TDD:
+// TODO: research how to use jest mocking
 
 describe("Movie Player", () => {
   let wrapper;

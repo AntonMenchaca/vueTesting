@@ -16,6 +16,6 @@ beforeEach(() => {
     })
     })
     it('fetches videoURL string async when a movie is clicked', () => {
-        wrapper.find()
+        wrapper.findComponent()
     })
 })
