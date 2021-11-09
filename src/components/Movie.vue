@@ -16,6 +16,7 @@
     </div>
     <div className="video-player-details">
       <h2>{{ movie.title }}</h2>
+      <h3 :class="this.movie.vote_average < 7  ? 'fail' : 'pass'" >{{movie.vote_average}}</h3>
       <div>{{ movie.overview }}</div>
     </div>
   </div>
@@ -25,7 +26,8 @@
 export default {
   name: "Movie",
   data: function () {
-    return {};
+    return {
+    };
   },
 
   props: {
@@ -35,6 +37,15 @@ export default {
 </script>
 
 <style>
+.fail {
+  color: rgb(235, 159, 72)
+}
+.pass {
+  color: rgb(44, 163, 44);
+}
+.video-player-details {
+  margin: 0 5px;
+}
 .embed-responsive {
   width: 100vw;
 }
