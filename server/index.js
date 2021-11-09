@@ -10,5 +10,5 @@ app.use(express.static(__dirname + "/../dist"));
 app.use("/", router);
 
 app.listen(port, () => {
-  console.log(`Example app listening at Port ${port}`);
+  console.log(`app listening at Port ${port}`);
 });

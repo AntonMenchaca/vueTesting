@@ -1,7 +1,7 @@
 <template>
   <div className="app">
     <header className="navbar">
-      <h1 v-if="movieSelected" @dblclick="() => (movieSelected = false)" :style="{color:'#b2db3d'}">Back</h1>
+      <button className="return-btn" v-if="movieSelected" @click="() => (movieSelected = false)" :style="{height:'60px', width: '150px'}"><strong>Return</strong></button>
       <h1 v-else>My Movie List</h1>
     </header>
 
@@ -18,7 +18,13 @@
       />
     </div>
     <div v-else>
-      <Movie :videoURL="videoURL" :movie="selectedMovie" />
+      <Movie
+      :video="videoURL"
+      :favorited="checkIfFavorited(selectedMovie)"
+      @handle-remove-click="removeFavoriteMovie"
+      @handle-favorite-click="addFavoriteMovie"
+      :videoURL="videoURL" 
+      :movie="selectedMovie" />
     </div>
   </div>
 </template>
@@ -55,39 +61,75 @@ export default {
     },
   },
   methods: {
+    
+    checkIfFavorited(movieObj) {
+      let MovieFound = false;
+     this.favorites.forEach((movie) => {
+       if (movie.title === movieObj.title) {
+         MovieFound = true
+       }
+     })
+       return MovieFound
+    },
+    addFavoriteMovie(bool, {title, poster_path, overview, release_date, vote_average, backdrop_path, id}) {
+    
+      axios.post('/movie', {newMovie: {
+         title,
+        poster_path,
+        overview,
+        release_date,
+        vote_average,
+        backdrop_path,
+        id
+      }}).then(() => {
+        axios.get('/favorites').then(({data}) => {
+          this.favorites = data
+        })
+      }).catch((err) => console.log(err))
+    },
+    removeFavoriteMovie(bool, movieID){
+      axios.delete('/movie', {data: {movieID}}).then(() => {
+        axios.get('/favorites')
+          .then(({data}) => {
+            this.favorites = data})})
+          .catch((err) => console.log(err))
+    },
     renderNewMovies(id) {
       axios
-        .get("./movies", {
+        .get("/movies", {
           params: {
             with_genres: id,
           },
         })
         .then(({ data }) => {
           this.movies = data.results;
-          console.log("this is the movies", this.movies);
         })
         .catch((err) => console.log(err));
     },
     handleFavorites(boolean) {
-      console.log("this is what we get emitted up: ", boolean);
       this.showFaves = !boolean;
     },
-    handleMovieSelect(movie) {
-      this.movieSelected = true;
-      this.selectedMovie = movie;
-      console.log(movie);
+    handleMovieSelect({title, poster_path, overview, release_date, vote_average, backdrop_path, id}) {
+      axios.get("/videoURL", {params: {
+        movieID: id
+      }})
+      .then(({data}) => {
+        this.movieSelected = true;
+      this.selectedMovie = {title, poster_path, overview, release_date, vote_average, backdrop_path, id, video: data.results[data.results.length - 1].key}; })
+      .catch((err) => console.log(err))
+     
     },
   },
   created: function () {
     axios
-      .get("./genres")
+      .get("/genres")
       .then(({ data }) => {
         this.genres = data.genres;
       })
       .catch((err) => console.log(err))
       .then(() =>
         axios
-          .get("./movies", {
+          .get("/movies", {
             params: {
               with_genres: 28,
             },
@@ -96,8 +138,18 @@ export default {
             this.movies = data.results;
           })
           .catch((err) => console.log(err))
-      );
+      ).then(() => {
+         axios
+          .get("/favorites")
+          .then(({ data }) => {
+            console.log(data)
+            this.favorites = data;
+          })
+          .catch((err) => console.log(err))
+
+      })
   },
+  
 };
 </script>
 
@@ -111,6 +163,9 @@ body,
   font-weight: 400;
   height: 100%;
   width: 100%;
+}
+.return-btn{
+
 }
 
 button {
@@ -160,7 +215,7 @@ button:active {
   padding: 20px;
 }
 
-.navbar > h1 {
+.navbar > button {
   margin: 0;
   font-weight: 400;
   cursor: pointer;

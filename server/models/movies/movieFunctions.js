@@ -7,4 +7,8 @@ module.exports = {
   deleteMovie: (MovieID) => {
     return Movie.findByIdAndDelete(MovieID);
   },
-};
+  getFavorites: () => {
+    return Movie.find({})
+  },
+ 
+ };

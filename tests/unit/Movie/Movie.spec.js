@@ -1,24 +1,24 @@
-import { shallowMount } from "@vue/test-utils";
-import Movie from "@/components/Movie/Movie.vue";
-jest.mock('axios', () => ({
-  get: Promise.resolve('value')
-}))
-// TODO: research how to use jest mocking
+// import { shallowMount } from "@vue/test-utils";
+// import Movie from "@/components/Movie/Movie.vue";
+// jest.mock('axios', () => ({
+//   get: Promise.resolve('value')
+// }))
+// // TODO: research how to use jest mocking
 
-describe("Movie Player", () => {
-  let wrapper;
-  beforeEach(() => {
-    wrapper = shallowMount(Movie, {
-      propsData: {
-        videoUrl: {type: String}
-      }
-    });
-  });
+// describe("Movie Player", () => {
+//   let wrapper;
+//   beforeEach(() => {
+//     wrapper = shallowMount(Movie, {
+//       propsData: {
+//         videoUrl: {type: String}
+//       }
+//     });
+//   });
 
-  it("renders playable video", async() => {
-  });
+//   it("renders playable video", async() => {
+//   });
 
-  it("contains a title underneath the video", () => {});
+//   it("contains a title underneath the video", () => {});
 
-  it("contains a description underneath the title", () => {});
-});
+//   it("contains a description underneath the title", () => {});
+// });

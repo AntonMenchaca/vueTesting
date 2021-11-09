@@ -1,12 +1,10 @@
 var models = require("../models");
 var movie = models.movie;
-const { searchURL, genreURL } = require("../helpers/apiHelpers.js");
+const { searchURL, genreURL, videoURL } = require("../helpers/apiHelpers.js");
 const axios = require("axios");
 
 module.exports = {
   getSearch: (req, res) => {
-    console.log("running getSearch");
-    console.log(req.query);
     return axios
       .get(`${searchURL}${req.query.with_genres}`)
       .then(function (response) {
@@ -18,11 +16,9 @@ module.exports = {
   },
 
   filterGenres: (req, res) => {
-    console.log("running filterGenres");
     return axios
       .get(`${genreURL}`)
       .then(function (response) {
-        console.log(req.body.id);
         res.status(200).send(response.data);
       })
       .catch(function (err) {
@@ -31,7 +27,6 @@ module.exports = {
   },
 
   getGenres: (req, res) => {
-    console.log("running getGenres");
     return axios
       .get(genreURL)
       .then(function (response) {
@@ -43,12 +38,18 @@ module.exports = {
   },
   saveMovie: (req, res) => {
     return movie
-      .createMovie(req.body.newMovie)
+      .saveMovie(req.body.newMovie)
       .then(() => res.sendStatus(200))
       .catch((err) => {
         console.log(err);
         res.sendStatus(500);
       });
+  },
+  getFavorites: (req, res) => {
+    return movie.getFavorites()
+    .then((response)=> {
+      res.send(response)})
+      .catch((err) => console.log(err))
   },
   deleteMovie: (req, res) => {
     return movie
@@ -59,4 +60,12 @@ module.exports = {
         res.sendStatus(500);
       });
   },
+  getVideoURL: (req, res) => {
+    axios.get(`${videoURL(req.query.movieID)}`)
+    .then(({data}) => {
+      res.send(data)})
+      .catch((err) => {
+      console.log(err)
+      res.sendStatus(500)})
+  }
 };

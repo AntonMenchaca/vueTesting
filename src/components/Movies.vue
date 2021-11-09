@@ -14,11 +14,11 @@
         <section className="movie-details">
           <div className="movie-year">
             <span className="title">Rating</span>
-            <span>{{ movie.release-date }}</span>
+            <span>{{ movie.release_date }}</span>
           </div>
           <div className="movie-rating">
             <span className="title">{{ movie.title }}</span>
-            <span>{{ movie.vote-average }}</span>
+            <span>{{ movie.vote_average }}</span>
           </div>
         </section>
       </div>

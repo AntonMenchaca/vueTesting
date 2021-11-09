@@ -10,7 +10,7 @@
     <div className="embed-responsive">
       <iframe
         className="embed-responsive-item"
-        :src="'https://www.youtube.com/embed/' + video"
+        :src="'https://www.youtube.com/embed/' + movie.video"
         allowFullScreen
       ></iframe>
     </div>
@@ -18,21 +18,31 @@
       <h2>{{ movie.title }}</h2>
       <h3 :class="this.movie.vote_average < 7  ? 'fail' : 'pass'" >{{movie.vote_average}}</h3>
       <div>{{ movie.overview }}</div>
+      <MovieBtn 
+      :movie="movie"
+      :isFavorited="favorited"
+      @handle-favorite-click="$emit('handle-favorite-click', this.isFavorited, this.movie)" @handle-remove-click="$emit('handle-remove-click', this.isFavorited, this.movie._id)"/>
     </div>
   </div>
 </template>
 
 <script>
+import MovieBtn from './MovieBtn.vue'
 export default {
   name: "Movie",
   data: function () {
     return {
     };
   },
-
-  props: {
-    movie: Object,
+  components: {
+    MovieBtn
   },
+  props: {
+    favorited: Boolean,
+    movie: Object,
+    video: String
+  },
+  emits: ['handle-favorite-click', "handle-remove-click"]
 };
 </script>
 
