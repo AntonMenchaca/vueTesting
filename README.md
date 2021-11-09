@@ -35,8 +35,8 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 
 
-![](documentation/addingFavorite.mp4)
+![](documentation/addingFavorite.gif)
 
-![](documentation/removingFavorite.mp4)
+![](documentation/removingFavorite.gif)
  
-![](documentation/watchingTrailer.mp4)
+![](documentation/watchingTrailer.gif)
