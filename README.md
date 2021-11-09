@@ -30,12 +30,25 @@ npm run test:e2e
 npm run lint
 ```
 
+### Add movie to your favorites list
+- You can filter through movie genres to view different movies.
+- Clicking a movie will bring you to the selected movies page. 
+- You can add the selected movie into your favorites list and will persist with mongo db.
 
 ![Add Movie to Favorites List](documentation/addingFavorite.gif)
 ---
 
+### Remove movie from your favorites list
+
+- Clicking a movie will bring you to the selected movies page. 
+- You can remove the selected movie from favorites list.
+
 ![Remove Movie from Favorites List](documentation/removingFavorite.gif)
 ---
+### Watch trailer of selected movie
+
+- Clicking a movie will bring you to the selected movies page. 
+- You can watch the official trailer for the movie
 
 ![Watch Trailer From Selected Movie](documentation/watchingTrailer.gif)
 ---
