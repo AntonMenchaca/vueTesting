@@ -47,8 +47,14 @@ export default {
   margin: 0 5px;
 }
 .embed-responsive {
-  width: 100vw;
+  display: flex;
+  justify-content: center;
+  
 }
+.embed-responsive-item {
+  width: 70vw;
+}
+
 .video-player {
   display: flex;
   flex-direction: column;

@@ -4,19 +4,21 @@
       v-for="movie in movies"
       @dblclick="$emit('handle-selected-movie', movie)"
       :key="movie.title"
-      className="movie_item"
+      className="movie-item"
     >
       <img :src="'https://image.tmdb.org/t/p/w1280/' + movie.poster_path" />
-      <div className="movie_description">
+      <h1 className="main-title">{{movie.title}}</h1>
+      <div className="movie-description">
+        
         <h2>{{ movie.overview }}</h2>
-        <section className="movie_details">
-          <div className="movie_year">
+        <section className="movie-details">
+          <div className="movie-year">
             <span className="title">Rating</span>
-            <span>{{ movie.release_date }}</span>
+            <span>{{ movie.release-date }}</span>
           </div>
-          <div className="movie_rating">
+          <div className="movie-rating">
             <span className="title">{{ movie.title }}</span>
-            <span>{{ movie.vote_average }}</span>
+            <span>{{ movie.vote-average }}</span>
           </div>
         </section>
       </div>
@@ -27,14 +29,9 @@
 <script>
 export default {
   name: "Movies",
-  components: {},
-  data: function () {
-    return {};
-  },
   props: {
     movies: Array,
   },
-  methods: {},
 };
 </script>
 
@@ -50,7 +47,7 @@ export default {
   background-color: #2c3e50;
 }
 
-.movie_item {
+.movie-item {
   flex-basis: 22%;
   box-sizing: border-box;
   margin: 1.5%;
@@ -64,15 +61,15 @@ export default {
   box-shadow: 0 10px 28px -7px rgba(0, 0, 0, 0.1);
 }
 
-.movie_item:hover {
+.movie-item:hover {
   cursor: pointer;
 }
 
-.movie_item > img {
+.movie-item > img {
   width: 100%;
 }
 
-.movie_description {
+.movie-description {
   display: flex;
   flex-grow: 1;
   flex-direction: column;
@@ -80,38 +77,47 @@ export default {
   padding: 10px;
 }
 
-.movie_description h2 {
+.main-title {
+  padding: 10px;
+  color: rgb(41, 40, 40);
+  font-weight: bold;
+  margin-bottom: 10px;
+  text-decoration: underline;
+}
+
+.movie-description h2 {
   color: #555;
   font-weight: bold;
   margin-bottom: 20px;
+  padding-left: 5px;
 }
 
-.movie_details {
+.movie-details {
   display: flex;
   justify-content: space-between;
 }
 
-.movie_details span {
+.movie-details span {
   color: #555;
   font-size: 0.8rem;
   font-weight: bold;
 }
 
-.movie_year,
-.movie_rating {
+.movie-year,
+.movie-rating {
   display: flex;
   flex-direction: column;
 }
 
-.movie_year .title,
-.movie_rating .title {
+.movie-year .title,
+.movie-rating .title {
   color: #aaa;
   margin-bottom: 5px;
   font-size: 0.65rem;
   font-weight: normal;
 }
 
-.movie_rating {
+.movie-rating {
   align-items: flex-end;
 }
 </style>

@@ -1,7 +1,8 @@
 <template>
   <div className="app">
     <header className="navbar">
-      <h1 @dblclick="() => (movieSelected = false)">My Movie List</h1>
+      <h1 v-if="movieSelected" @dblclick="() => (movieSelected = false)" :style="{color:'#b2db3d'}">Back</h1>
+      <h1 v-else>My Movie List</h1>
     </header>
 
     <div v-if="movieSelected === false" className="main">
@@ -17,7 +18,7 @@
       />
     </div>
     <div v-else>
-      <Movie :movie="selectedMovie" />
+      <Movie :videoURL="videoURL" :movie="selectedMovie" />
     </div>
   </div>
 </template>
@@ -25,7 +26,7 @@
 <script>
 import Search from "./components/Search";
 import Movies from "./components/Movies";
-import Movie from "./components/Movie";
+import Movie from "./components/Movie/Movie";
 import axios from "axios";
 export default {
   name: "App",
@@ -37,6 +38,7 @@ export default {
       showFaves: false,
       selectedMovie: {},
       movieSelected: false,
+      videoURL: ''
     };
   },
   components: {
@@ -109,6 +111,32 @@ body,
   font-weight: 400;
   height: 100%;
   width: 100%;
+}
+
+button {
+  color: #111111;
+  background-color: #FFFFFF;
+  width: 200px;
+  padding: 0;
+  text-align: center;
+  align-self: center;
+  margin: 1rem 0;
+  transition: all 0.5s 50ms;
+  border: 1px solid #111111
+}
+select option, button:hover {
+  cursor: pointer;
+  transition: all 0.5s 50ms;
+  background-color: #34495E;
+  color: #FAFAFA;
+}
+button:focus {
+  outline: 1px solid #2e2e2e;
+  outline-offset: -4px;
+}
+button:active {
+  color: #2e2e2e;
+  background-color: #FFFFFF;
 }
 
 .app {

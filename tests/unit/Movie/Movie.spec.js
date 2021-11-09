@@ -1,14 +1,22 @@
 import { shallowMount } from "@vue/test-utils";
-import Movie from "../../src/components/Movie.vue";
+import Movie from "@/components/Movie/Movie.vue";
+jest.mock('axios', () => ({
+  get: Promise.resolve('value')
+}))
 // TDD:
 
 describe("Movie Player", () => {
   let wrapper;
   beforeEach(() => {
-    wrapper = shallowMount(Movie, {});
+    wrapper = shallowMount(Movie, {
+      propsData: {
+        videoUrl: {type: String}
+      }
+    });
   });
 
-  it("renders playable video", () => {});
+  it("renders playable video", async() => {
+  });
 
   it("contains a title underneath the video", () => {});
 

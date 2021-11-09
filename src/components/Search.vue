@@ -11,6 +11,7 @@
     </button>
     <br /><br />
     <select v-model="selected">
+      <option value="" selected disabled hidden>Choose a Genre</option >
       <option v-for="genre in genres" :key="genre.id" :value="genre.id">
         {{ genre.name }}
       </option>
