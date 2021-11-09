@@ -32,3 +32,11 @@ npm run lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+
+
+![](documentation/addingFavorite.mp4)
+
+![](documentation/removingFavorite.mp4)
+ 
+![](documentation/watchingTrailer.mp4)
