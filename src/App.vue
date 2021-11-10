@@ -1,7 +1,7 @@
 <template>
   <div className="app">
     <header className="navbar">
-      <button className="return-btn" v-if="movieSelected" @click="() => (movieSelected = false)" :style="{height:'60px', width: '150px'}"><strong>Return</strong></button>
+      <button name="Return" className="return-btn" v-if="movieSelected" @click="() => (movieSelected = false)" :style="{height:'60px', width: '150px'}"><strong>Return</strong></button>
       <h1 v-else>My Movie List</h1>
     </header>
 
@@ -145,7 +145,7 @@ export default {
       ).then(() => {
          axios
           .get("/favorites")
-          .then(({ data }) => {
+          .then(({ data }) => { 
             this.favorites = data;
           })
           .catch((err) => console.log(err))

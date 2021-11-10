@@ -37,6 +37,7 @@ module.exports = {
       });
   },
   saveMovie: (req, res) => {
+    console.log(req.body.newMovie)
     return movie
       .saveMovie(req.body.newMovie)
       .then(() => res.sendStatus(200))

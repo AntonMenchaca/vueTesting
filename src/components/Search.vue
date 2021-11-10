@@ -1,12 +1,13 @@
 <template>
   <div className="search">
     <button
+    name="All Movies"
       v-if="this.showFaves === true"
       @click="$emit('handle-show-faves', this.showFaves)"
     >
       Show All Movies
     </button>
-    <button v-else @click="$emit('handle-show-faves', this.showFaves)">
+    <button name="Show Favorites" v-else @click="$emit('handle-show-faves', this.showFaves)">
       Show Favorites
     </button>
     <br /><br />
@@ -17,7 +18,7 @@
       </option>
     </select>
     <br /><br />
-    <button @click="$emit('handle-genre-change', this.selected)">Search</button>
+    <button name="Search" @click="$emit('handle-genre-change', this.selected)">Search</button>
   </div>
 </template>
 

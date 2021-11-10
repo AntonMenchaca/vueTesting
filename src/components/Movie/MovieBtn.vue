@@ -1,6 +1,6 @@
 <template>
-    <button v-if="isFavorited === true" @click="onRemoveClick(isFavorited, movie)">Remove Favorite</button>   
-    <button v-else @click="onFavoriteClick(isFavorited, this.movie._id)">Add Favorite</button>   
+    <button  name="Remove Favorite" v-if="isFavorited === true" @click="onRemoveClick(isFavorited, movie)">Remove Favorite</button>   
+    <button name="Add Favorite" v-else @click="onFavoriteClick(isFavorited, this.movie._id)">Add Favorite</button>   
 </template>
 
 <script>
