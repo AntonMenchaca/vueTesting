@@ -1,4 +1,6 @@
-const {  videoURL } = require("../server/helpers/apiHelpers.js");
+
+var videoURL = (movieID) => {
+    return (`https://api.themoviedb.org/3/movie/${movieID}/videos?api_key=${process.env.API_KEY}&language=en-US`)}
 
 const axios = require('axios')
 exports.getVideoURL= (req, res) => {
