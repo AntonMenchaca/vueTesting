@@ -171,7 +171,7 @@ body,
 button {
   color: #111111;
   background-color: #FFFFFF;
-  width: 200px;
+  width: 100%;
   padding: 0;
   text-align: center;
   align-self: center;
@@ -206,9 +206,8 @@ button:active {
 .navbar {
   width: 100%;
   text-align: center;
-
   box-sizing: border-box;
-  background-color: #34495e;
+  background-color: #1a1a1a;
   color: #fff;
   box-shadow: 0 10px 28px -7px rgba(0, 0, 0, 0.5);
   z-index: 2;

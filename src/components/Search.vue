@@ -45,7 +45,7 @@ export default {
   min-width: 200px;
   position: sticky;
   padding: 20px;
-  background-color: #7c3302;
+  background-color: #444242;
   z-index: 2;
   text-align: center;
   font-size: 20px;
