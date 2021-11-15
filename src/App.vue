@@ -89,7 +89,7 @@ export default {
     },
     removeFavoriteMovie(bool, movieID){
       console.log(movieID)
-      axios.delete('/selectedmovie', {data: {movieID}}).then(() => {
+      axios.delete('/movie', {data: {movieID}}).then(() => {
         axios.get('/favorites')
           .then(({data}) => {
             this.favorites = data})})
