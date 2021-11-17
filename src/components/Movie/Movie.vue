@@ -19,6 +19,7 @@
       <h3 :class="this.movie.vote_average < 7  ? 'fail' : 'pass'" >{{movie.vote_average}}</h3>
       <div>{{ movie.overview }}</div>
       <MovieBtn 
+      :showFaves="showFaves"
       :movie="movie"
       :isFavorited="favorited"
       @handle-favorite-click="$emit('handle-favorite-click', this.favorited, this.movie)" @handle-remove-click="$emit('handle-remove-click', this.favorited, this.movie._id)"/>
@@ -38,6 +39,7 @@ export default {
     MovieBtn
   },
   props: {
+    showFaves: Boolean,
     favorited: Boolean,
     movie: Object,
     video: String
@@ -55,6 +57,8 @@ export default {
 }
 .video-player-details {
   margin: 0 5px;
+  display: flex;
+  flex-direction: column;
 }
 .embed-responsive {
   display: flex;

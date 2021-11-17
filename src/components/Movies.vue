@@ -30,6 +30,7 @@
 export default {
   name: "Movies",
   props: {
+    
     movies: Array,
   },
 };

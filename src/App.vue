@@ -19,6 +19,7 @@
     </div>
     <div v-else>
       <Movie
+      :showFaves="showFaves"
       :favorited="checkIfFavorited(selectedMovie)"
       @handle-remove-click="removeFavoriteMovie"
       @handle-favorite-click="addFavoriteMovie"

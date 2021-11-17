@@ -1,12 +1,14 @@
 <template>
-    <button  name="Remove Favorite" v-if="isFavorited === true" @click="onRemoveClick(isFavorited, movie)">Remove Favorite</button>   
-    <button name="Add Favorite" v-else @click="onFavoriteClick(isFavorited, this.movie._id)">Add Favorite</button>   
+    <button  name="Remove Favorite" v-if="isFavorited == true && showFaves === true" @click="onRemoveClick(isFavorited, movie)">Remove Favorite</button>   
+    <button name="Add Favorite" v-else-if="isFavorited == false" @click="onFavoriteClick(isFavorited, this.movie._id)">Add Favorite</button>
+    <h3 v-else>Added To Favorites!</h3>   
 </template>
 
 <script>
 export default {
     name: "MovieBtn",
     props: {
+    showFaves: Boolean,
     isFavorited: Boolean,
     movie: Object
   },
@@ -23,3 +25,9 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+button {
+    width: 35%;
+}
+</style>
